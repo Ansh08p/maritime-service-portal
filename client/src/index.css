@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* GLOBAL SCALING (like 110–125% zoom feel) */
+html {
+  font-size: 17px;
+}
+
+/* SMOOTH FONT RENDERING */
+body {
+  @apply bg-slate-50 text-gray-900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
