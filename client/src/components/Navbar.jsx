@@ -1,13 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import logo from "../assets/logo.png"; // make sure logo exists
+import logo from "../assets/logo.png";
 
 function Navbar() {
 
   const { token, logout, role } = useContext(AuthContext);
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,7 +21,8 @@ function Navbar() {
   const navLink = (path, label) => (
     <Link
       to={path}
-      className={`transition ${
+      onClick={() => setMenuOpen(false)}
+      className={`block py-2 ${
         location.pathname === path
           ? "text-blue-400"
           : "text-gray-300 hover:text-white"
@@ -33,9 +35,9 @@ function Navbar() {
   return (
 
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 ${
         scrolled
-          ? "bg-slate-900/70 backdrop-blur-lg shadow-lg"
+          ? "bg-slate-900/70 backdrop-blur-lg"
           : "bg-slate-900/90 backdrop-blur-md"
       } text-white`}
     >
@@ -43,84 +45,90 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* LOGO */}
-
         <Link to="/" className="flex items-center gap-3">
-
-          <img
-            src={logo}
-            alt="PMS Logo"
-            className="h-10 w-10 object-contain bg-white p-1 rounded"
-          />
-
-          <div>
-            <h1 className="text-sm font-semibold leading-tight">
-              Professional Marine Services
-            </h1>
-            <p className="text-xs text-gray-400">
-              Maritime Solutions
-            </p>
-          </div>
-
+          <img src={logo} className="h-10 w-10 bg-white p-1 rounded" />
+          <span className="text-sm font-semibold">
+            PMS
+          </span>
         </Link>
 
-        {/* NAV LINKS */}
+        {/* DESKTOP MENU */}
+        <div className="hidden md:flex items-center gap-8">
 
-        <div className="hidden md:flex items-center gap-10 text-sm font-medium">
-
-          {/* MAIN WEBSITE LINKS */}
           {navLink("/", "Home")}
           {navLink("/services", "Services")}
           {navLink("/ports", "Ports")}
           {navLink("/clients", "Clients")}
           {navLink("/contact", "Contact")}
 
-          {/* DIVIDER */}
           <div className="w-px h-5 bg-gray-600"></div>
 
-          {/* APP FEATURES */}
           {navLink("/products", "Products")}
           {token && navLink("/orders", "Orders")}
           {role === "admin" && navLink("/admin", "Admin")}
 
         </div>
 
-        {/* AUTH BUTTONS */}
-
-        <div className="flex items-center gap-3">
+        {/* RIGHT SIDE */}
+        <div className="hidden md:flex items-center gap-3">
 
           {!token ? (
             <>
-              <Link
-                to="/login"
-                className="px-4 py-1.5 border border-gray-400 rounded-lg hover:bg-white hover:text-black transition"
-              >
+              <Link to="/login" className="border px-3 py-1 rounded">
                 Login
               </Link>
-
-              <Link
-                to="/register"
-                className="px-4 py-1.5 bg-blue-500 rounded-lg hover:bg-blue-600 transition"
-              >
+              <Link to="/register" className="bg-blue-500 px-3 py-1 rounded">
                 Register
               </Link>
             </>
           ) : (
-            <button
-              onClick={logout}
-              className="px-4 py-1.5 bg-white text-black rounded-lg hover:bg-gray-200 transition"
-            >
+            <button onClick={logout} className="bg-white text-black px-3 py-1 rounded">
               Logout
             </button>
           )}
 
         </div>
 
+        {/* MOBILE BUTTON */}
+        <button
+          className="md:hidden text-2xl"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
+
       </div>
 
+      {/* MOBILE MENU */}
+      {menuOpen && (
+        <div className="md:hidden bg-slate-900 px-6 pb-4">
+
+          {navLink("/", "Home")}
+          {navLink("/services", "Services")}
+          {navLink("/ports", "Ports")}
+          {navLink("/clients", "Clients")}
+          {navLink("/contact", "Contact")}
+          {navLink("/products", "Products")}
+
+          {token && navLink("/orders", "Orders")}
+          {role === "admin" && navLink("/admin", "Admin")}
+
+          {!token ? (
+            <>
+              {navLink("/login", "Login")}
+              {navLink("/register", "Register")}
+            </>
+          ) : (
+            <button onClick={logout} className="mt-2 text-left">
+              Logout
+            </button>
+          )}
+
+        </div>
+      )}
+
     </nav>
-
   );
-
 }
 
 export default Navbar;
