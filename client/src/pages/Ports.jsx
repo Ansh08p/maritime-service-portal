@@ -9,20 +9,20 @@ function Ports() {
       img: "https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg"
     },
     {
-      country: "Singapore",
-      ports: "Singapore",
-      img: "https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg"
-    },
-    {
-      country: "U.A.E",
-      ports: "Fujairah, Jebel Ali, Khor Fakkan",
-      img: "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg"
-    },
-    {
-      country: "South Africa",
-      ports: "Durban, Cape Town, Port Elizabeth",
-      img: "https://images.pexels.com/photos/912050/pexels-photo-912050.jpeg"
-    },
+  country: "Singapore",
+  ports: "Singapore",
+  img: "https://images.pexels.com/photos/34358847/pexels-photo-34358847.jpeg"
+},
+{
+  country: "U.A.E",
+  ports: "Fujairah, Jebel Ali, Khor Fakkan",
+  img: "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg"
+},
+{
+  country: "South Africa",
+  ports: "Durban, Cape Town, Port Elizabeth",
+  img: "https://images.pexels.com/photos/912050/pexels-photo-912050.jpeg"
+},
     {
       country: "Brazil",
       ports: "Santos, Paranagua, Rio Grande",

@@ -1,64 +1,53 @@
+import { motion } from "framer-motion";
+
+import msc from "../assets/clients/msc.png";
+import maersk from "../assets/clients/maersk.png";
+import cosco from "../assets/clients/cosco.png";
+import oldendorff from "../assets/clients/oldendorff.png";
+import anglo from "../assets/clients/angloeastern.png";
+import bsm from "../assets/clients/bsm.png";
+
 function Clients() {
 
   const clients = [
-    "MAERSK",
-    "MSC",
-    "CMA CGM",
-    "COSCO",
-    "Hapag-Lloyd",
-    "Evergreen"
+    { name: "MSC", logo: msc },
+    { name: "Maersk", logo: maersk },
+    { name: "COSCO Shipping", logo: cosco },
+    { name: "Oldendorff Carriers", logo: oldendorff },
+    { name: "Anglo Eastern", logo: anglo },
+    { name: "Bernhard Schulte", logo: bsm }
   ];
 
   return (
-
     <div className="bg-slate-50 min-h-screen">
 
-      {/* HERO */}
-
-      <section
-        className="h-[50vh] flex items-center justify-center text-white text-center relative"
-        style={{
-          backgroundImage: "url('https://images.pexels.com/photos/753331/pexels-photo-753331.jpeg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        }}
-      >
-        <div className="absolute inset-0 bg-black/70"></div>
-
-        <h1 className="relative z-10 text-4xl font-bold">
-          Our Clients
-        </h1>
+      <section className="bg-slate-900 text-white text-center py-20">
+        <h1 className="text-4xl font-bold">Our Clients</h1>
+        <p className="text-gray-400 mt-2">
+          Trusted by global maritime leaders
+        </p>
       </section>
 
-      {/* CLIENTS */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
 
-      <div className="max-w-5xl mx-auto py-16 px-6 text-center">
-
-        <h2 className="text-3xl font-bold mb-10">
-          Trusted by Leading Shipping Companies
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-6">
-
-          {clients.map((client, index) => (
-
-            <div
-              key={index}
-              className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition text-lg font-semibold text-gray-600"
-            >
-              {client}
-            </div>
-
-          ))}
-
-        </div>
+        {clients.map((client, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.05 }}
+            className="bg-white p-6 rounded-xl shadow hover:shadow-xl flex items-center justify-center"
+          >
+            <img
+              src={client.logo}
+              alt={client.name}
+              className="h-14 object-contain"
+            />
+          </motion.div>
+        ))}
 
       </div>
 
     </div>
-
   );
-
 }
 
 export default Clients;
